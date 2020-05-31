@@ -1,26 +1,26 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
     <div class="container">
-        <a class="navbar-brand" [routerLink]="['/home']"  >{{title}}</a>
+        <a class="navbar-brand" [routerLink]="['/home']">{{title}}</a>
         <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
             <li class="nav-item active" routerLinkActive="active">
                 <a class="nav-link" [routerLink]="['/members']">Matches</a>
             </li>
-            <li class="nav-item"  routerLinkActive="active">
+            <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" [routerLink]="['/list']">Lists</a>
             </li>
-            <li class="nav-item"  routerLinkActive="active">
+            <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" [routerLink]="['/messages']">Messages</a>
             </li>
         </ul>
         <div *ngIf="loggedIn()" class="dropdown" dropdown>
             <span class="mr-1">
-                <img src="{{photoUrl}}"> 
+                <img src="{{photoUrl || '../../assets/user.png'}}">
             </span>
             <a class="dropdown-toggle text-light" dropdownToggle>
                 Welcome {{authService.decoderToken?.unique_name | titlecase}}
             </a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
-                <a class="dropdown-item" [routerLink]="['/member/edit']" ><i class="fa fa-user"></i>Edit Profile</a>
+                <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-user"></i>Edit Profile</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
             </div>

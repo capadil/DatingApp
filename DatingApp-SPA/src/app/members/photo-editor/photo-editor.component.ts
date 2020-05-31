@@ -50,6 +50,7 @@ export class PhotoEditorComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
+
     this.uploader.onSuccessItem = (item, response, status, header) => {
       if (response) {
         const res: Photo = JSON.parse(response);
@@ -61,6 +62,14 @@ export class PhotoEditorComponent implements OnInit {
           isMain: res.isMain,
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.ChangeMemberPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem(
+            'user',
+            JSON.stringify(this.authService.currentUser)
+          );
+        }
       }
     };
   }
